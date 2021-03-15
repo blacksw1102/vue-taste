@@ -5,11 +5,11 @@
         <button type="button" @click="getData()">Get</button>
         <button type="button" @click="setData()">Set</button>
 
-        <select class="form-control" v-model="region">
+        <select class="form-control" v-model="region" @change="changeRegion">
             <option :key="i" :value="d.v" v-for="(d,i) in options">{{d.t}}</option>
         </select>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered" v-if="tableShow">
             <tr :key="i" v-for="(d,i) in options">
                 <td>{{d.v}}</td>
                 <td>{{d.t}}</td>
@@ -30,7 +30,8 @@ export default {
                 {v:'J', t:'Jeju'},
                 {v:'B', t:'Busan'}
             ],
-            region: "J"
+            region: "J",
+            tableShow: true
         };
     },
     watch: {
@@ -47,6 +48,9 @@ export default {
         },
         setData() {
             this.input1 = 12345;
+        },
+        changeRegion() {
+            alert(this.region)
         }
     },
     beforeCreate() {
